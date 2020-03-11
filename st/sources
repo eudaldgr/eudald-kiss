@@ -1,0 +1,5 @@
+https://dl.suckless.org/st/st-0.8.2.tar.gz
+patches/st-rightclickpaste-0.8.2.diff
+patches/st-scrollback-0.8.2.diff
+patches/st-scrollback-mouse-0.8.2.diff
+patches/st-xresources-20190105-3be4cf1.diff
