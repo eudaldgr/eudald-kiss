@@ -1,8 +1,9 @@
 #!/bin/sh -e
 
-autoreconf --verbose --install --force
+autoreconf -fis
 
-./configure
+./configure \
+    --prefix=/usr
 
 make
-make PREFIX=/usr DESTDIR="$1" install
+make DESTDIR="$1" install
