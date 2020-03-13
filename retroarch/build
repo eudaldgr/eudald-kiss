@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix='/usr' \
+    --disable-jack \
+    --disable-oss \
+    --disable-discord
+make clean
+make
+make -C gfx/video_filters
+make DESTDIR="$1" install
