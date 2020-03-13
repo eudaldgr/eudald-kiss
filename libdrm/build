@@ -3,7 +3,6 @@
 ./configure \
     --prefix=/usr \
     --disable-valgrind \
-    --disable-radeon \
     --disable-intel \
     --disable-nouveau
 
