@@ -39,7 +39,7 @@ meson \
     --localstatedir=/var \
     --buildtype=release \
     -Dplatforms=x11,drm \
-    -Ddri-drivers=auto \
+    -Ddri-drivers='' \
     -Dgallium-drivers=radeonsi \
     -Dvulkan-drivers=amd \
     . output
