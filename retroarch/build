@@ -2,6 +2,13 @@
 
 ./configure \
     --prefix='/usr' \
+    --enable-dynamic \
+    --disable-vg \
+    --disable-discord \
+    --disable-builtinminiupnpc \
+    --disable-builtinmbedtls \
+    --disable-builtinflac \
+    --disable-builtinzlib \
     --disable-jack \
     --disable-oss \
     --disable-discord
