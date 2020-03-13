@@ -2,17 +2,14 @@
 
 ./configure \
     --prefix='/usr' \
-    --enable-dynamic \
-    --disable-vg \
-    --disable-discord \
-    --disable-builtinminiupnpc \
-    --disable-builtinmbedtls \
-    --disable-builtinflac \
-    --disable-builtinzlib \
+    --sysconfdir='/etc' \
+    --enable-udev \
+    --enable-networking \
+    --enable-sse \
+    --enable-threads \
     --disable-jack \
     --disable-oss \
     --disable-discord
-make clean
+
 make
-make -C gfx/video_filters
 make DESTDIR="$1" install
