@@ -1,0 +1,2 @@
+git+https://github.com/yshui/picom
+patches/rounded-corners.diff
