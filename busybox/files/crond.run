@@ -1,2 +1,1 @@
-#!/bin/sh
-exec crond -f
+/var/db/kiss/repo/core/./busybox/files/crond.run

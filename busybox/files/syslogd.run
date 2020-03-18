@@ -1,2 +1,1 @@
-#!/bin/sh
-exec syslogd -n
+/var/db/kiss/repo/core/./busybox/files/syslogd.run
