@@ -7,7 +7,7 @@
  *2)mouse slow       3)mouse fast     */
 static const uint16_t movements[] = {20,40,15,400};
 /* resize by line like in mcwm -- jmbi */
-static const bool     resize_by_line          = true;
+static const bool     resize_by_line          = false;
 /* the ratio used when resizing and keeping the aspect */
 static const float    resize_keep_aspect_ratio= 1.03;
 ///---Offsets---///
@@ -32,7 +32,7 @@ static const bool inverted_colors = true;
 /*0) Outer border size. If you put this negative it will be a square.
  *1) Full borderwidth    2) Magnet border size
  *3) Resize border size  */
-static const uint8_t borders[] = {4,5,5,4};
+static const uint8_t borders[] = {0,0,5,4};
 /* Windows that won't have a border.
  * It uses substring comparison with what is found in the WM_NAME
  * attribute of the window. You can test this using `xprop WM_NAME`
@@ -40,11 +40,8 @@ static const uint8_t borders[] = {4,5,5,4};
 #define LOOK_INTO "WM_NAME"
 static const char *ignore_names[] = {"bar"};
 ///--Menus and Programs---///
-static const char *menucmd[]   = { "dmenu_run", "-fn", "Hack-12", "-h", "30", "-w", "1900", "-x", "10", "-y", "10", "-p", "dmenu", "-nb", "#3c3836", NULL };
-static const char *termcmd[]   = { "st", NULL };
-static const char *tmuxcmd[]   = { "st", "-e", "tmux", NULL };
-static const char *filecmd[]   = { "st", "-e", "fff", NULL };
-static const char *browser[]   = { "tabbed", "-c", "surf", "-e", NULL };
+static const char *dmenu[]   = { "dmenu_run", "-fn", "Hack-12", "-h", "30", "-w", "1900", "-x", "10", "-y", "10", "-p", "dmenu", "-nb", "#3c3836", NULL };
+static const char *st[]   = { "st", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
@@ -87,10 +84,6 @@ static key keys[] = {
     // Focus to next/previous window
     {  MOD ,              XK_Tab,        focusnext,         {.i=TWOBWM_FOCUS_NEXT}},
     {  MOD |SHIFT,        XK_Tab,        focusnext,         {.i=TWOBWM_FOCUS_PREVIOUS}},
-    {  MOD |ALT,          XK_l,          focusnext,         {.i=TWOBWM_FOCUS_NEXT}},
-    {  MOD |ALT,          XK_k,          focusnext,         {.i=TWOBWM_FOCUS_NEXT}},
-    {  MOD |ALT,          XK_h,          focusnext,         {.i=TWOBWM_FOCUS_PREVIOUS}},
-    {  MOD |ALT,          XK_j,          focusnext,         {.i=TWOBWM_FOCUS_PREVIOUS}},
     // Kill a window
     {  MOD ,              XK_x,          deletewin,         {}},
     // Resize a window
@@ -168,7 +161,7 @@ static key keys[] = {
     {  MOD |SHIFT ,       XK_v,          sendtonextworkspace,{}},
     {  MOD |SHIFT ,       XK_c,          sendtoprevworkspace,{}},
     // Iconify the window
-    //{  MOD ,              XK_i,          hide,              {}},
+    {  MOD ,              XK_i,          hide,              {}},
     // Make the window unkillable
     {  MOD ,              XK_a,          unkillable,        {}},
     // Make the window appear always on top
@@ -186,12 +179,9 @@ static key keys[] = {
     {  MOD |SHIFT,        XK_Right,      cursor_move,       {.i=TWOBWM_CURSOR_RIGHT}},
     {  MOD |SHIFT,        XK_Left,       cursor_move,       {.i=TWOBWM_CURSOR_LEFT}},
     // Start programs
-    {  MOD ,              XK_d,          start,             {.com = menucmd}},
-    {  MOD ,              XK_Return,     start,             {.com = termcmd}},
-    {  MOD |SHIFT,        XK_Return,     start,             {.com = tmuxcmd}},
-    //{  MOD |SHIFT,        XK_p,          start,             {.com = filecmd}},
-    {  MOD |ALT,          XK_f,          start,             {.com = browser}},
-	// Exit or restart 2bwm
+    {  MOD ,              XK_d,          start,             {.com = dmenu}},
+    {  MOD ,              XK_Return,     start,             {.com = st}},
+    // Exit or restart 2bwm
     {  MOD |CONTROL,      XK_q,          twobwm_exit,       {.i=0}},
     {  MOD |CONTROL,      XK_r,          twobwm_restart,    {.i=0}},
     {  MOD ,              XK_space,      halfandcentered,   {.i=0}},
@@ -211,9 +201,5 @@ static key keys[] = {
 static Button buttons[] = {
     {  MOD        ,XCB_BUTTON_INDEX_1,     mousemotion,   {.i=TWOBWM_MOVE}, false},
     {  MOD        ,XCB_BUTTON_INDEX_3,     mousemotion,   {.i=TWOBWM_RESIZE}, false},
-    {  0          ,XCB_BUTTON_INDEX_3,     start,         {.com = menucmd}, true},
-    {  MOD|SHIFT,  XCB_BUTTON_INDEX_1,     changeworkspace, {.i=0}, false},
-    {  MOD|SHIFT,  XCB_BUTTON_INDEX_3,     changeworkspace, {.i=1}, false},
-    {  MOD|ALT,    XCB_BUTTON_INDEX_1,     changescreen,    {.i=1}, false},
-    {  MOD|ALT,    XCB_BUTTON_INDEX_3,     changescreen,    {.i=0}, false}
+    {  MOD        ,XCB_BUTTON_INDEX_1,     raisewindow,   {.i=TWOBWM_RESIZE}, false},
 };
