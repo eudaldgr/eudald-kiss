@@ -1,11 +1,4 @@
 #!/bin/sh -e
 
-sed -i 's|Liberation Mono|Monospace|g' config.def.h
-
-patch -p1 < st-rightclickpaste-0.8.2.diff
-patch -p1 < st-scrollback-0.8.2.diff
-patch -p1 < st-scrollback-mouse-0.8.2.diff
-patch -p1 < st-xresources-20190105-3be4cf1.diff
-
 make
 make PREFIX=/usr DESTDIR="$1" install
