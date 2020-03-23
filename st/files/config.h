@@ -64,7 +64,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st-256color";
+char *termname = "xterm-256color";
 
 /*
  * spaces per tab
@@ -104,10 +104,6 @@ static const char *colorname[] = {
   [13] = "#8f3f71", /* magenta */
   [14] = "#427b58", /* cyan    */
   [15] = "#3c3836", /* white   */
-
-  /* special colors */
-  [256] = "#fbf1c7", /* background */
-  [257] = "#3c3836", /* foreground */
 };
 
 
@@ -115,10 +111,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor
  */
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 256;
+unsigned int defaultfg = 15;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
