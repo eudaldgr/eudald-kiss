@@ -2,7 +2,7 @@
 
 export DESTDIR="$1"
 
-patch -p1 < rounded-corners.diff
+patch -p1 < rounded-corners-20200402-0e158c5.diff
 
 meson \
     --prefix=/usr \
