@@ -38,6 +38,10 @@ meson \
     --mandir=/usr/share/man \
     --localstatedir=/var \
     --buildtype=release \
+    -Dopengl=true \
+    -Dgles1=false \
+    -Dgles2=true \
+    -Degl=true \
     -Dplatforms=x11,drm \
     -Ddri-drivers='' \
     -Dgallium-drivers=radeonsi \
