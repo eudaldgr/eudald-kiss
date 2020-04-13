@@ -32,13 +32,13 @@ static const bool inverted_colors = true;
 /*0) Outer border size. If you put this negative it will be a square.
  *1) Full borderwidth    2) Magnet border size
  *3) Resize border size  */
-static const uint8_t borders[] = {0,0,5,4};
+static const uint8_t borders[] = {0,0,0,0};
 /* Windows that won't have a border.
  * It uses substring comparison with what is found in the WM_NAME
  * attribute of the window. You can test this using `xprop WM_NAME`
  */
 #define LOOK_INTO "WM_NAME"
-static const char *ignore_names[] = {"bar"};
+static const char *ignore_names[] = {"bar", "st"};
 ///--Menus and Programs---///
 static const char *dmenu[]   = { "dmenu_run", "-fn", "Hack-12", "-h", "30", "-w", "1900", "-x", "10", "-y", "10", "-p", "dmenu", "-nb", "#3c3836", NULL };
 static const char *st[]   = { "st", NULL };
