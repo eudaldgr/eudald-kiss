@@ -1,0 +1,43 @@
+#!/bin/sh -e
+
+scripts/setlocalversion --save-scmversion
+cp config .config
+make olddefconfig
+make kernelrelease > version
+
+kernver="$(cat version)"
+modulesdir="$1/usr/lib/modules/$kernver"
+builddir="$modulesdir/build"
+
+make
+make INSTALL_MOD_PATH="$1/usr" modules_install
+
+rm "$modulesdir/build" "$modulesdir/source"
+
+chmod -Rc u=rwX,go=rX "$1"
+
+install -Dt "$builddir"                 -m644 .config Makefile Module.symvers System.map version vmlinux
+install -Dt "$builddir/arch/x86"        -m644 arch/x86/Makefile
+install -Dt "$builddir/arch/x86/kernel" -m644 arch/x86/kernel/asm-offsets.s
+install -Dt "$builddir/kernel"          -m644 kernel/Makefile
+install -Dt "$builddir/drivers/md"      -m644 drivers/md/*.h
+install -Dt "$builddir/net/mac80211"    -m644 net/mac80211/*.h
+install -Dt "$builddir/tools/objtool"         tools/objtool/objtool
+
+cp -a scripts          "$builddir/scripts"
+cp -a include          "$builddir/include"
+cp -a arch/x86/include "$builddir/arch/x86/include"
+
+find . -name "Kconfig*" -exec install -Dm644 {} "$builddir/{}" \;
+
+rm -r "$builddir/Documentation"
+find -L "$builddir" -type l -delete
+find "$builddir" -type f -name "*.o" -delete
+
+mkdir -p "$1/usr/src"
+ln -sv "/usr/lib/modules/$kernver/build" "$1/usr/src/linux"
+
+chmod -Rc u=rwX,go=rX "$1"
+
+mkdir -p "$1/boot"
+make INSTALL_PATH="$1/boot" install

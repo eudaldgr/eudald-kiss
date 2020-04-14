@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+mount /dev/sdb2 "/boot/efi/"
+mv "/boot/System.map" "/boot/System.map-5.6.4"
+mv "/boot/vmlinuz" "/boot/efi/EFI/Kiss/vmlinuz-5.6.4.efi"
+umount "/boot/efi"
