@@ -1,10 +1,17 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --disable-valgrind \
-    --disable-intel \
-    --disable-nouveau
+export DESTDIR="$1"
 
-make
-make DESTDIR="$1" install
+meson \
+    --prefix=/usr \
+    -Dvalgrind=false \
+    -Dintel=false \
+    -Dnouveau=false \
+    -Dradeon=false \
+    -Dvmwgfx=false \
+    -Dman-pages=false \
+    -Damdgpu=true \
+    . build
+
+ninja -C build
+ninja -C build install
