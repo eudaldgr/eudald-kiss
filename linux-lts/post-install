@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/sh -e
 
 mount /dev/sdb2 "/boot/efi/"
-rm -rf "/boot/System.map-*" "/boot/efi/EFI/Kiss/vmlinuz-*"
-mv "/boot/System.map" "/boot/System.map-5.4.28"
-mv "/boot/vmlinuz" "/boot/efi/EFI/Kiss/vmlinuz-5.4.28.efi"
+rm -rf "/boot/System.map-5.4.28" "/boot/efi/EFI/Kiss/vmlinuz-5.4.28.efi"
+mv "/boot/System.map" "/boot/System.map-5.4.32"
+mv "/boot/vmlinuz" "/boot/efi/EFI/Kiss/vmlinuz-5.4.32.efi"
 umount "/boot/efi"
