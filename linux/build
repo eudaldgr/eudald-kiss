@@ -1,21 +1,26 @@
 #!/bin/sh -e
 
+# Set the kernel up for success!
 scripts/setlocalversion --save-scmversion
-cp config .config
 make olddefconfig
 make kernelrelease > version
 
+# Useful variables
 kernver="$(cat version)"
 modulesdir="$1/usr/lib/modules/$kernver"
 builddir="$modulesdir/build"
 
-make
+# Make that bad boy!
+echo "Making linux-"$kernver""
+make -j "$(nproc)"
+
+echo "Installing modules..."
 make INSTALL_MOD_PATH="$1/usr" modules_install
 
+echo "Cleaning up..."
 rm "$modulesdir/build" "$modulesdir/source"
 
-chmod -Rc u=rwX,go=rX "$1"
-
+echo "Copying files to build external modules..."
 install -Dt "$builddir"                 -m644 .config Makefile Module.symvers System.map version vmlinux
 install -Dt "$builddir/arch/x86"        -m644 arch/x86/Makefile
 install -Dt "$builddir/arch/x86/kernel" -m644 arch/x86/kernel/asm-offsets.s
@@ -30,14 +35,20 @@ cp -a arch/x86/include "$builddir/arch/x86/include"
 
 find . -name "Kconfig*" -exec install -Dm644 {} "$builddir/{}" \;
 
-rm -r "$builddir/Documentation"
-find -L "$builddir" -type l -delete
-find "$builddir" -type f -name "*.o" -delete
-
-mkdir -p "$1/usr/src"
-ln -sv "/usr/lib/modules/$kernver/build" "$1/usr/src/linux"
-
 chmod -Rc u=rwX,go=rX "$1"
 
+echo "Removing cruft..."
+rm -r "$builddir/Documentation"
+find -L "$builddir" -type l             -exec rm -rf {} +
+find    "$builddir" -type f -name "*.o" -exec rm -rf {} +
+
+echo "Laying trap..."
+mkdir -p "$1/usr/src"
+ln -sv "$1/usr/lib/modules/$kernver/build" "$1/usr/src/linux"
+
+echo "Installing kernel..."
 mkdir -p "$1/boot"
-make INSTALL_PATH="$1/boot" install
+install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$kernver.efi"
+install -Dm644 "System.map"            "$1/boot/System.map-$kernver"
+
+echo "Remember to mount /dev/sdb2 to /boot/efi before install"
