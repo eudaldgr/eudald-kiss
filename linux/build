@@ -1,17 +1,19 @@
 #!/bin/sh -e
 
+# Patch it
+patch -Np1 -i gcc-10.patch
+
 # Set the kernel up for success!
 scripts/setlocalversion --save-scmversion
 make olddefconfig
 make kernelrelease > version
 
 # Useful variables
-kernver="$(cat version)"
-modulesdir="$1/usr/lib/modules/$kernver"
+modulesdir="$1/usr/lib/modules/$2"
 builddir="$modulesdir/build"
 
 # Make that bad boy!
-echo "Making linux-"$kernver""
+echo "Making linux-"$2""
 make -j "$(nproc)"
 
 echo "Installing modules..."
@@ -44,11 +46,11 @@ find    "$builddir" -type f -name "*.o" -exec rm -rf {} +
 
 echo "Laying trap..."
 mkdir -p "$1/usr/src"
-ln -sv "$1/usr/lib/modules/$kernver/build" "$1/usr/src/linux"
+ln -sv "$1/usr/lib/modules/$2/build" "$1/usr/src/linux"
 
 echo "Installing kernel..."
 mkdir -p "$1/boot"
-install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$kernver.efi"
-install -Dm644 "System.map"            "$1/boot/System.map-$kernver"
+install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$2.efi"
+install -Dm644 "System.map"            "$1/boot/System.map-$2"
 
 echo "Remember to mount /dev/sdb2 to /boot/efi before install"
