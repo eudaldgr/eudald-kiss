@@ -37,7 +37,7 @@ find . -name "Kconfig*" -exec install -Dm644 {} "$builddir/{}" \;
 chmod -Rc u=rwX,go=rX "$1"
 
 echo "Removing cruft..."
-rm -r "$builddir/Documentation"
+rm   -r "$builddir/Documentation"
 find -L "$builddir" -type l             -exec rm -rf {} +
 find    "$builddir" -type f -name "*.o" -exec rm -rf {} +
 
