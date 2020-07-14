@@ -41,7 +41,7 @@ static const uint8_t borders[] = {0,0,0,0};
 static const char *ignore_names[] = {"bar", "st"};
 ///--Menus and Programs---///
 static const char *dmenu[]   = { "dmenu_run", "-fn", "Hack-12", "-h", "30", "-w", "1900", "-x", "10", "-y", "10", "-p", "dmenu", "-nb", "#3c3836", NULL };
-static const char *st[]   = { "st", NULL };
+static const char *st[]   = { "scroll", "st", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
