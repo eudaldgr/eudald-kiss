@@ -42,7 +42,7 @@ find -L "$builddir" -type l             -exec rm -rf {} +
 find    "$builddir" -type f -name "*.o" -exec rm -rf {} +
 
 for arch in alpha,arc,arm,arm64,c6x,csky,h8300,hexagon,ia64,m68k,microblaze,mips,nds32,nios2,openrisc,parisc,powerpc,riscv,s390,sh,sparc,um,unicore32,xtensa; do
-    rm -rf $arch
+    rm -rf "$arch"
 done
 
 echo "Laying trap..."
@@ -53,5 +53,3 @@ echo "Installing kernel..."
 mkdir -p "$1/boot"
 install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$2.efi"
 install -Dm644 "System.map"            "$1/boot/System.map-$2"
-
-echo "Remember to mount /dev/sdb2 to /boot/efi before install"
