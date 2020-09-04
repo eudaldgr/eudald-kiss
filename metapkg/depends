@@ -1,4 +1,5 @@
 2bwm
+alsa-utils
 ccache
 clang
 cmake
@@ -9,12 +10,16 @@ firefox
 gnugrep
 gnupg1
 hack
+hicolor-icon-theme
 hsetroot
 htop
 linux
 linux-firmware
 linux-headers
 meson
+mpd
+mpv
+ncmpcpp
 opendoas
 pciutils
 pfetch
