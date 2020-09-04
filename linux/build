@@ -57,15 +57,3 @@ echo "Installing kernel..."
 mkdir -p "$1/boot"
 install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$2.efi"
 install -Dm644 "System.map"            "$1/boot/System.map-$2"
-
-cat << EOF
-
-
-+-----------------------------------------------------------------+
-|                                                                 |
-|     Remember to mount /dev/sdb2 to /boot/efi before install     |
-|                                                                 |
-+-----------------------------------------------------------------+
-
-
-EOF
