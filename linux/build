@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+for patch in *.patch; do
+    patch -p1 -i "$patch"
+done
+
 # Set the kernel up for success!
 scripts/setlocalversion --save-scmversion
 make olddefconfig
