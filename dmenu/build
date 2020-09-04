@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-patch -p1 < dmenu-lineheight-4.9.diff
-patch -p1 < dmenu-xyw-4.9.diff
-
-make
-make DESTDIR="$1" PREFIX=/usr install
