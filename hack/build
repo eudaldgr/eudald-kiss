@@ -1,6 +1,0 @@
-#!/bin/sh -e
-
-mkdir -p "$1/usr/share/fonts/TTF"
-cp ./*.ttf "$1/usr/share/fonts/TTF"
-
-find "$1" -type f -name "*Windows*" -exec rm -rf {} +
