@@ -41,6 +41,7 @@ static const uint8_t borders[] = {3,5,5,4};
 static const char *ignore_names[] = {"bar", "st"};
 ///--Menus and Programs---///
 static const char *st[]   = { "st", NULL };
+static const char *firefox[]   = { "firefox", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
@@ -124,7 +125,7 @@ static key keys[] = {
     {  MOD ,              XK_Home,       resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_GROW}},
     {  MOD ,              XK_End,        resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_SHRINK}},
     // Maximize (ignore offset and no EWMH atom)
-    {  MOD ,              XK_f,          maximize,          {}},
+    //{  MOD ,              XK_f,          maximize,          {}},
     // Full screen (disregarding offsets and adding EWMH atom)
     {  MOD |SHIFT ,       XK_x,          fullscreen,        {}},
     // Maximize vertically
@@ -180,6 +181,7 @@ static key keys[] = {
     // Start programs
     //{  MOD ,              XK_d,          start,             {.com = dmenu}},
     {  MOD ,              XK_Return,     start,             {.com = st}},
+    {  MOD ,              XK_f,          start,             {.com = firefox}},
     // Exit or restart 2bwm
     {  MOD |CONTROL,      XK_q,          twobwm_exit,       {.i=0}},
     {  MOD |CONTROL,      XK_r,          twobwm_restart,    {.i=0}},
