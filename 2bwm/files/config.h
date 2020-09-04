@@ -13,7 +13,7 @@ static const float    resize_keep_aspect_ratio= 1.03;
 ///---Offsets---///
 /*0)offsetx          1)offsety
  *2)maxwidth         3)maxheight */
-static const uint8_t offsets[] = {30,70,60,90};
+static const uint8_t offsets[] = {0,0,0,0};
 ///---Colors---///
 /*0)focuscol         1)unfocuscol
  *2)fixedcol         3)unkilcol
@@ -32,7 +32,7 @@ static const bool inverted_colors = true;
 /*0) Outer border size. If you put this negative it will be a square.
  *1) Full borderwidth    2) Magnet border size
  *3) Resize border size  */
-static const uint8_t borders[] = {0,0,0,0};
+static const uint8_t borders[] = {3,5,5,4};
 /* Windows that won't have a border.
  * It uses substring comparison with what is found in the WM_NAME
  * attribute of the window. You can test this using `xprop WM_NAME`
@@ -40,8 +40,7 @@ static const uint8_t borders[] = {0,0,0,0};
 #define LOOK_INTO "WM_NAME"
 static const char *ignore_names[] = {"bar", "st"};
 ///--Menus and Programs---///
-static const char *dmenu[]   = { "dmenu_run", "-fn", "Hack-12", "-h", "30", "-w", "1900", "-x", "10", "-y", "10", "-p", "dmenu", "-nb", "#3c3836", NULL };
-static const char *st[]   = { "scroll", "st", NULL };
+static const char *st[]   = { "st", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
@@ -179,7 +178,7 @@ static key keys[] = {
     {  MOD |SHIFT,        XK_Right,      cursor_move,       {.i=TWOBWM_CURSOR_RIGHT}},
     {  MOD |SHIFT,        XK_Left,       cursor_move,       {.i=TWOBWM_CURSOR_LEFT}},
     // Start programs
-    {  MOD ,              XK_d,          start,             {.com = dmenu}},
+    //{  MOD ,              XK_d,          start,             {.com = dmenu}},
     {  MOD ,              XK_Return,     start,             {.com = st}},
     // Exit or restart 2bwm
     {  MOD |CONTROL,      XK_q,          twobwm_exit,       {.i=0}},
