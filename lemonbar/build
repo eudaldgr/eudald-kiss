@@ -1,6 +1,0 @@
-#!/bin/sh -e
-
-patch -p1 < lemonbar-xft-v1.3.patch
-
-make
-make DESTDIR="$1" PREFIX=/usr install
