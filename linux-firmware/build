@@ -1,10 +1,6 @@
 #!/bin/sh -e
 
-install -Dm644 amd/amd_sev_fam17h_model0xh.sbin  "$1/usr/lib/firmware/amd/amd_sev_fam17h_model0xh.sbin"
-install -Dm644 amd-ucode/microcode_amd_fam17h.bin "$1/usr/lib/firmware/amd-ucode/microcode_amd_fam17h.bin"
-
-for firmware in ce ce_2 k2_smc k_mc k_smc mc me me_2 mec mec2 mec2_2 mec_2 pfp pfp_2 rlc sdma sdma1 smc smc_sk uvd vce; do
-    install -Dm644 "amdgpu/polaris10_$firmware.bin" "$1/usr/lib/firmware/amdgpu/polaris10_$firmware.bin"
-done
-
-install -Dm644 rtl_nic/rtl8168g-2.fw "$1/usr/lib/firmware/rtl_nic/rtl8168g-2.fw"
+install -Dm644 amd/amd_sev_fam17h_model0xh.sbin   -t "$1/usr/lib/firmware/amd"
+install -Dm644 amd-ucode/microcode_amd_fam17h.bin -t "$1/usr/lib/firmware/amd-ucode"
+install -Dm644 amdgpu/polaris10_*                 -t "$1/usr/lib/firmware/amdgpu"
+install -Dm644 rtl_nic/rtl8168g-2.fw              -t "$1/usr/lib/firmware/rtl_nic"
