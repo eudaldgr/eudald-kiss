@@ -5,7 +5,6 @@ clang
 cmake
 dhcpcd
 dosfstools
-dotfiles
 eudev
 firefox
 gnugrep
@@ -14,6 +13,7 @@ hack
 hicolor-icon-theme
 hsetroot
 htop
+ledger
 linux
 linux-firmware
 linux-headers
@@ -25,7 +25,9 @@ opendoas
 pash
 pciutils
 pfetch
+qemu
 rtorrent
+shfm
 st
 sx
 tree
@@ -34,4 +36,7 @@ xclip
 xf86-input-libinput
 xf86-video-amdgpu
 xorg-server
+zathura
+zathura-pdf-poppler
 zip
+zzz
