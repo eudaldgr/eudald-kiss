@@ -5,7 +5,6 @@ clang
 cmake
 dhcpcd
 dosfstools
-eudev
 firefox
 gnugrep
 gnupg1
@@ -14,6 +13,7 @@ hicolor-icon-theme
 hsetroot
 htop
 ledger
+libudev-zero
 linux
 linux-firmware
 linux-headers
@@ -21,13 +21,13 @@ meson
 mpd
 mpv
 ncmpcpp
-opendoas
 pash
 pciutils
 pfetch
 qemu
 rtorrent
 shfm
+sls
 st
 sx
 tree
