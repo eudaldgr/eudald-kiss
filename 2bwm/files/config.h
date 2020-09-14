@@ -127,9 +127,10 @@ static key keys[] = {
     {  MOD ,              XK_Home,       resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_GROW}},
     {  MOD ,              XK_End,        resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_SHRINK}},
     // Maximize (ignore offset and no EWMH atom)
+    {  MOD |SHIFT,        XK_x,          maximize,          {}},
     //{  MOD ,              XK_f,          maximize,          {}},
     // Full screen (disregarding offsets and adding EWMH atom)
-    {  MOD |SHIFT ,       XK_x,          fullscreen,        {}},
+    //{  MOD |SHIFT ,       XK_x,          fullscreen,        {}},
     // Maximize vertically
     {  MOD ,              XK_m,          maxvert_hor,       {.i=TWOBWM_MAXIMIZE_VERTICALLY}},
     // Maximize horizontally
