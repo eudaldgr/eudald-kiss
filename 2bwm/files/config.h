@@ -7,7 +7,7 @@
  *2)mouse slow       3)mouse fast     */
 static const uint16_t movements[] = {20,40,15,400};
 /* resize by line like in mcwm -- jmbi */
-static const bool     resize_by_line          = false;
+static const bool     resize_by_line          = true;
 /* the ratio used when resizing and keeping the aspect */
 static const float    resize_keep_aspect_ratio= 1.03;
 ///---Offsets---///
@@ -19,7 +19,7 @@ static const uint8_t offsets[] = {0,0,0,0};
  *2)fixedcol         3)unkilcol
  *4)fixedunkilcol    5)outerbordercol
  *6)emptycol         */
-static const char *colors[] = {"#5F8787","#222222","#aaaaaa","#666666","#c1c1c1","#222222","#222222"};
+static const char *colors[] = {"#35586c","#333333","#7a8c5c","#ff6666","#cc9933","#0d131a","#000000"};
 /* if this is set to true the inner border and outer borders colors will be swapped */
 static const bool inverted_colors = true;
 ///---Cursor---///
@@ -38,12 +38,12 @@ static const uint8_t borders[] = {3,5,5,4};
  * attribute of the window. You can test this using `xprop WM_NAME`
  */
 #define LOOK_INTO "WM_NAME"
-static const char *ignore_names[] = {"bar"};
+static const char *ignore_names[] = {"bar", "st", "xclock"};
 ///--Menus and Programs---///
 static const char *st[]   = { "st", NULL };
 static const char *firefox[]   = { "firefox", NULL };
-static const char *suspend[]   = { "doas", "zzz", NULL };
-static const char *hibernate[]   = { "doas", "ZZZ", NULL };
+static const char *suspend[]   = { "$KISS_SU", "zzz", NULL };
+static const char *hibernate[]   = { "$KISS_SU", "ZZZ", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
@@ -51,6 +51,21 @@ static void halfandcentered(const Arg *arg)
 	maxhalf(&arg2);
 	Arg arg3 = {.i=TWOBWM_TELEPORT_CENTER};
 	teleport(&arg3);
+}
+///---Sloppy focus behavior---///
+/*
+ * Command to execute when switching from sloppy focus to click to focus
+ * The strings "Sloppy" and "Click" will be passed as the last argument
+ * If NULL this is ignored
+ */
+static const char *sloppy_switch_cmd[] = {};
+//static const char *sloppy_switch_cmd[] = { "notify-send", "toggle sloppy", NULL };
+static void toggle_sloppy(const Arg *arg)
+{
+    is_sloppy = !is_sloppy;
+    if (arg->com != NULL && LENGTH(arg->com) > 0) {
+        start(arg);
+    }
 }
 ///---Shortcuts---///
 /* Check /usr/include/X11/keysymdef.h for the list of all keys
@@ -87,7 +102,7 @@ static key keys[] = {
     {  MOD ,              XK_Tab,        focusnext,         {.i=TWOBWM_FOCUS_NEXT}},
     {  MOD |SHIFT,        XK_Tab,        focusnext,         {.i=TWOBWM_FOCUS_PREVIOUS}},
     // Kill a window
-    {  MOD ,              XK_x,          deletewin,         {}},
+    {  MOD ,              XK_q,          deletewin,         {}},
     // Resize a window
     {  MOD |SHIFT,        XK_k,          resizestep,        {.i=TWOBWM_RESIZE_UP}},
     {  MOD |SHIFT,        XK_j,          resizestep,        {.i=TWOBWM_RESIZE_DOWN}},
@@ -127,10 +142,9 @@ static key keys[] = {
     {  MOD ,              XK_Home,       resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_GROW}},
     {  MOD ,              XK_End,        resizestep_aspect, {.i=TWOBWM_RESIZE_KEEP_ASPECT_SHRINK}},
     // Maximize (ignore offset and no EWMH atom)
-    {  MOD |SHIFT,        XK_x,          maximize,          {}},
-    //{  MOD ,              XK_f,          maximize,          {}},
+    {  MOD ,              XK_x,          maximize,          {}},
     // Full screen (disregarding offsets and adding EWMH atom)
-    //{  MOD |SHIFT ,       XK_x,          fullscreen,        {}},
+    {  MOD |SHIFT ,       XK_x,          fullscreen,        {}},
     // Maximize vertically
     {  MOD ,              XK_m,          maxvert_hor,       {.i=TWOBWM_MAXIMIZE_VERTICALLY}},
     // Maximize horizontally
@@ -190,6 +204,7 @@ static key keys[] = {
     {  MOD |CONTROL,      XK_q,          twobwm_exit,       {.i=0}},
     {  MOD |CONTROL,      XK_r,          twobwm_restart,    {.i=0}},
     {  MOD ,              XK_space,      halfandcentered,   {.i=0}},
+    {  MOD ,              XK_s,          toggle_sloppy,     {.com = sloppy_switch_cmd}},
     // Change current workspace
        DESKTOPCHANGE(     XK_1,                             0)
        DESKTOPCHANGE(     XK_2,                             1)
@@ -206,5 +221,9 @@ static key keys[] = {
 static Button buttons[] = {
     {  MOD        ,XCB_BUTTON_INDEX_1,     mousemotion,   {.i=TWOBWM_MOVE}, false},
     {  MOD        ,XCB_BUTTON_INDEX_3,     mousemotion,   {.i=TWOBWM_RESIZE}, false},
-    {  MOD        ,XCB_BUTTON_INDEX_1,     raisewindow,   {.i=TWOBWM_RESIZE}, false},
+    {  0          ,XCB_BUTTON_INDEX_3,     start,         {.com = menucmd}, true},
+    {  MOD|SHIFT,  XCB_BUTTON_INDEX_1,     changeworkspace, {.i=0}, false},
+    {  MOD|SHIFT,  XCB_BUTTON_INDEX_3,     changeworkspace, {.i=1}, false},
+    {  MOD|ALT,    XCB_BUTTON_INDEX_1,     changescreen,    {.i=1}, false},
+    {  MOD|ALT,    XCB_BUTTON_INDEX_3,     changescreen,    {.i=0}, false}
 };

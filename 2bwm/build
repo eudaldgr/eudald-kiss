@@ -1,1 +1,4 @@
-../../community/community/2bwm/build
+#!/bin/sh -e
+
+make PREFIX=/usr
+make DESTDIR="$1" PREFIX=/usr install

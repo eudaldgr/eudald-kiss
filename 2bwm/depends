@@ -1,1 +1,4 @@
-../../community/community/2bwm/depends
+libxcb
+xcb-util-keysyms
+xcb-util-wm
+xcb-util-xrm
