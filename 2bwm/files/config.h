@@ -40,6 +40,7 @@ static const uint8_t borders[] = {3,5,5,4};
 #define LOOK_INTO "WM_NAME"
 static const char *ignore_names[] = {"bar", "st", "xclock"};
 ///--Menus and Programs---///
+static const char *menucmd[]   = { "", NULL };
 static const char *st[]   = { "st", NULL };
 static const char *firefox[]   = { "firefox", NULL };
 static const char *suspend[]   = { "$KISS_SU", "zzz", NULL };
