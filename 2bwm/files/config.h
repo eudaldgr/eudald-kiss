@@ -43,8 +43,8 @@ static const char *ignore_names[] = {"bar", "st", "xclock"};
 static const char *menucmd[]   = { "", NULL };
 static const char *st[]   = { "st", NULL };
 static const char *firefox[]   = { "firefox", NULL };
-static const char *suspend[]   = { "$KISS_SU", "zzz", NULL };
-static const char *hibernate[]   = { "$KISS_SU", "ZZZ", NULL };
+static const char *suspend[]   = { "sls", "zzz", NULL };
+static const char *hibernate[]   = { "sls", "ZZZ", NULL };
 ///--Custom foo---///
 static void halfandcentered(const Arg *arg)
 {
