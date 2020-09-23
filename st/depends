@@ -1,1 +1,4 @@
-/home/eudaldgr/repos/repo/xorg/st/depends
+fontconfig
+libX11
+libXft
+ncurses make

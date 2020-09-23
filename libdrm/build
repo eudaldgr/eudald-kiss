@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dudev=false \
+    -Damdgpu=true \
+    -Dexynos=false \
+    -Dfreedreno=false \
+    -Dintel=false \
+    -Dnouveau=false \
+    -Domap=false \
+    -Dradeon=false \
+    -Dtegra=false \
+    -Dvc4=false \
+    -Detnaviv=false \
+    -Dvmwgfx=false \
+    -Dlibkms=true \
+    -Dvalgrind=false \
+    . build
+
+ninja -C build
+ninja -C build install
