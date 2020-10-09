@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Terminus:pixelsize=15:antialias=true:autohint=true";
+static char *font = "Terminus:pixelsize=14";
 static int borderpx = 30;
 
 /*
@@ -19,7 +19,7 @@ static int borderpx = 30;
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = NULL;
+char *scroll = "scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -74,7 +74,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "xterm-256color";
+char *termname = "st-256color";
 
 /*
  * spaces per tab
@@ -96,34 +96,38 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
   /* 8 normal colors */
-  [0] = "#fbf1c7", /* black   */ /* hard contrast: #f9f5d7 / soft contrast: #f2e5bc */
-  [1] = "#cc241d", /* red     */
-  [2] = "#98971a", /* green   */
-  [3] = "#d79921", /* yellow  */
-  [4] = "#458588", /* blue    */
-  [5] = "#b16286", /* magenta */
-  [6] = "#689d6a", /* cyan    */
-  [7] = "#7c6f64", /* white   */
+  [0] = "#3B4252", /* black   */
+  [1] = "#BF616A", /* red     */
+  [2] = "#A3BE8C", /* green   */
+  [3] = "#EBCB8B", /* yellow  */
+  [4] = "#81A1C1", /* blue    */
+  [5] = "#B48EAD", /* magenta */
+  [6] = "#88C0D0", /* cyan    */
+  [7] = "#E5E9F0", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#928374", /* black   */
-  [9]  = "#9d0006", /* red     */
-  [10] = "#79740e", /* green   */
-  [11] = "#b57614", /* yellow  */
-  [12] = "#076678", /* blue    */
-  [13] = "#8f3f71", /* magenta */
-  [14] = "#427b58", /* cyan    */
-  [15] = "#3c3836", /* white   */
+  [8]  = "#4C566A", /* black   */
+  [9]  = "#BF616A", /* red     */
+  [10] = "#A3BE8C", /* green   */
+  [11] = "#EBCB8B", /* yellow  */
+  [12] = "#81A1C1", /* blue    */
+  [13] = "#B48EAD", /* magenta */
+  [14] = "#8FBCBB", /* cyan    */
+  [15] = "#ECEFF4", /* white   */
+
+  [255] = 0,
+  [256] = "#2e3440", /* background */
+  [257] = "#d8dee9", /* foreground */
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor
  */
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 15;
-static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
+static unsigned int defaultrcs = 256;
 
 /*
  * Default shape of cursor

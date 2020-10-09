@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+for _font in terminus-ttf-$2/*.ttf; do
+    install -Dm644 "$_font" -t "$1/usr/share/fonts/TTF"
+done

@@ -1,4 +1,3 @@
 bison         make
-kmod          make
 libelf
 linux-headers make

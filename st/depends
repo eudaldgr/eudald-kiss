@@ -3,3 +3,4 @@ libX11
 libXft
 ncurses    make
 pkgconf    make
+scroll
