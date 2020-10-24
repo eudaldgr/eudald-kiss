@@ -38,11 +38,11 @@ static const uint8_t borders[] = {3,5,5,4};
  * attribute of the window. You can test this using `xprop WM_NAME`
  */
 #define LOOK_INTO "WM_NAME"
-static const char *ignore_names[] = {"bar", "st", "xclock"};
+static const char *ignore_names[] = {"bar", "st", "xclock", "Mozilla Firefox"};
 ///--Menus and Programs---///
 static const char *menucmd[]   = { "", NULL };
 static const char *st[]   = { "st", NULL };
-static const char *firefox[]   = { "firefox", NULL };
+static const char *firefox[]   = { "/home/eudaldgr/bin/ff", NULL };
 static const char *suspend[]   = { "sls", "zzz", NULL };
 static const char *hibernate[]   = { "sls", "ZZZ", NULL };
 ///--Custom foo---///
