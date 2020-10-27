@@ -8,5 +8,5 @@ make INSTALL_MOD_PATH="$1/usr" INSTALL_MOD_STRIP=1 modules_install
 
 rm "$1/usr/lib/modules/$2/build" "$1/usr/lib/modules/$2/source"
 
-install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-$2.efi"
-install -Dm644 "System.map"            "$1/boot/System-$2.map"
+install -Dm644 "arch/x86/boot/bzImage" "$1/boot/efi/EFI/Kiss/vmlinuz-lts-$2.efi"
+install -Dm644 "System.map"            "$1/boot/System-lts-$2.map"

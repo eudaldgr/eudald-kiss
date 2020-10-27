@@ -1,0 +1,3 @@
+bison         make
+libelf
+linux-headers make

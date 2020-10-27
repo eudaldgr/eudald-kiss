@@ -15,9 +15,9 @@ imagemagick
 ledger
 libudev-zero
 libva
-linux
 linux-firmware
 linux-headers
+linux-lts
 meson
 mpv
 mutt
