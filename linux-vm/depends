@@ -1,3 +1,4 @@
 bison          make
 libelf         make
 linux-headers  make
+perl           make
